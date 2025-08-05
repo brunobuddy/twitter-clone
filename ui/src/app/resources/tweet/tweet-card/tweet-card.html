@@ -1,0 +1,6 @@
+<div *ngIf="tweet">
+  <a routerLink="/tweets/{{ tweet.id }}">
+    <h2>{{ tweet.content }}</h2>
+    <p>By: {{ tweet.author?.username }}</p>
+  </a>
+</div>

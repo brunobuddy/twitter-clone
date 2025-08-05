@@ -1,0 +1,19 @@
+<ng-container *ngIf="tweet">
+  <h1>{{ tweet.content }}</h1>
+  <p>
+    By: <a href="/users/{{ tweet.author?.id }}">{{ tweet.author?.username }}</a>
+  </p>
+  <p>Created at: {{ tweet.createdAt | date : "short" }}</p>
+  <ul>
+    <li *ngFor="let comment of tweet.comments">
+      <p>{{ comment.content }}</p>
+      <p>
+        By:
+        <a href="/users/{{ comment.author?.id }}">{{
+          comment.author?.username
+        }}</a>
+      </p>
+      <p>Created at: {{ comment.createdAt | date : "short" }}</p>
+    </li>
+  </ul>
+</ng-container>
