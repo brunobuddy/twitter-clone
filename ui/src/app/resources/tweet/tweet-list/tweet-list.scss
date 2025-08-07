@@ -6,7 +6,7 @@
 
   .tweet-list-header {
     position: sticky;
-    top: 0;
+    top: 60px; // Account for main header height
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid #e1e8ed;
@@ -21,6 +21,15 @@
     }
   }
 
+  // Tweet form styling integration
+  app-tweet-form {
+    display: block;
+    position: sticky;
+    top: 116px; // Header height + tweet-list-header height
+    z-index: 9;
+    background: white;
+  }
+
   .tweet-list {
     .tweet-item {
       border-bottom: 1px solid #e1e8ed;
@@ -32,6 +41,24 @@
       app-tweet-card {
         display: block;
       }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .tweet-list-container {
+    .tweet-list-header {
+      padding: 12px 16px;
+      top: 60px; // Mobile header height
+
+      .page-title {
+        font-size: 18px;
+      }
+    }
+
+    app-tweet-form {
+      top: 104px; // Mobile header + mobile tweet-list-header
     }
   }
 }

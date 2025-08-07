@@ -1,0 +1,68 @@
+<div class="tweet-form-container" *ngIf="authService.isAuthenticated()">
+  <form [formGroup]="tweetForm" (ngSubmit)="onSubmit()" class="tweet-form">
+    <div class="form-header">
+      <h2 class="form-title">What's happening?</h2>
+    </div>
+
+    <div class="form-body">
+      <div class="textarea-container">
+        <textarea
+          formControlName="content"
+          placeholder="What's on your mind?"
+          class="tweet-textarea"
+          rows="3"
+          (input)="onTextareaInput($event)"
+          [class.error]="content?.invalid && content?.touched"
+          [class.over-limit]="isOverLimit"
+        ></textarea>
+
+        <div class="character-count" [class.over-limit]="isOverLimit">
+          {{ remainingCharacters }}
+        </div>
+      </div>
+
+      <div class="form-errors" *ngIf="content?.errors && content?.touched">
+        <div *ngIf="content?.errors?.['required']" class="error-message">
+          Tweet content is required
+        </div>
+        <div *ngIf="content?.errors?.['maxlength']" class="error-message">
+          Tweet is too long (maximum {{ maxLength }} characters)
+        </div>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <div class="tweet-actions">
+        <div class="left-actions">
+          <!-- Future: Add emoji, image, poll buttons here -->
+        </div>
+
+        <div class="right-actions">
+          <button
+            type="submit"
+            class="tweet-button"
+            [disabled]="!canSubmit"
+            [class.loading]="isSubmitting"
+          >
+            <span *ngIf="!isSubmitting">Tweet</span>
+            <span *ngIf="isSubmitting" class="loading-text">
+              <span class="spinner"></span>
+              Tweeting...
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="auth-prompt" *ngIf="!authService.isAuthenticated()">
+  <div class="auth-message">
+    <h3>Join the conversation</h3>
+    <p>Sign in to share your thoughts and connect with others.</p>
+    <div class="auth-buttons">
+      <a routerLink="/login" class="auth-btn login-btn">Log in</a>
+      <a routerLink="/signup" class="auth-btn signup-btn">Sign up</a>
+    </div>
+  </div>
+</div>

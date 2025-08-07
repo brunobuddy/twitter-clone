@@ -2,11 +2,21 @@ import { Routes } from '@angular/router';
 import { TweetList } from './resources/tweet/tweet-list/tweet-list';
 import { TweetDetail } from './resources/tweet/tweet-detail/tweet-detail';
 import { UserDetail } from './resources/user/user-detail/user-detail';
+import { Login } from './pages/login/login';
+import { Singup } from './pages/singup/singup';
 
 export const routes: Routes = [
   {
     path: '',
     component: TweetList,
+  },
+  {
+    path: 'login',
+    component: Login,
+  },
+  {
+    path: 'signup',
+    component: Singup,
   },
   {
     path: 'tweets/:tweetId',

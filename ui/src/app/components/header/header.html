@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="header-container">
+    <!-- Logo/Brand -->
+    <div class="header-brand">
+      <a routerLink="/" class="brand-link">
+        <h1 class="brand-title">Twitter Clone</h1>
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="header-nav">
+      @if (isAuthenticated()) {
+      <!-- Authenticated user menu -->
+      <div class="user-menu">
+        <span class="welcome-text"
+          >Welcome, {{ currentUser()?.username }}!</span
+        >
+        <button class="logout-btn" (click)="onLogout()">Logout</button>
+      </div>
+      } @else {
+      <!-- Guest navigation -->
+      <div class="auth-links">
+        <a routerLink="/login" class="nav-link login-link"> Login </a>
+        <a routerLink="/signup" class="nav-link signup-link"> Sign Up </a>
+      </div>
+      }
+    </nav>
+  </div>
+</header>
