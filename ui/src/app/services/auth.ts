@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Import shared types
 export interface User {
@@ -54,7 +55,7 @@ export interface AuthError {
 })
 export class AuthService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:1111/api';
+  private readonly baseUrl = `${environment.apiBaseUrl}/api`;
 
   // State management
   private readonly currentUserSubject = new BehaviorSubject<User | null>(null);

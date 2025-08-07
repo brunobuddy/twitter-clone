@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth';
+import { environment } from '../../environments/environment';
 
 // Import shared types
 export interface User {
@@ -68,7 +69,7 @@ export interface UserListParams {
 export class UserService {
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
-  private readonly baseUrl = 'http://localhost:1111/api';
+  private readonly baseUrl = `${environment.apiBaseUrl}/api`;
 
   /**
    * Create a new user
