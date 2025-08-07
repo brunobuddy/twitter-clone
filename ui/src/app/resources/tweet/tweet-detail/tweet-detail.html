@@ -36,6 +36,13 @@
     </div>
   </div>
 
+  <!-- Comment form for logged in users -->
+  <app-comment-form
+    [tweetId]="tweet.id"
+    (commentCreated)="onCommentCreated($event)"
+  >
+  </app-comment-form>
+
   <div
     class="comments-section"
     *ngIf="tweet.comments && tweet.comments.length > 0"

@@ -1,0 +1,213 @@
+.comment-form-container {
+  border-top: 1px solid #e1e8ed;
+  padding: 16px 20px;
+  background: white;
+
+  .comment-form {
+    .form-body {
+      display: flex;
+      gap: 12px;
+
+      .user-avatar {
+        flex-shrink: 0;
+
+        .avatar-placeholder {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+
+      .textarea-container {
+        flex: 1;
+        position: relative;
+
+        .comment-textarea {
+          width: 100%;
+          border: none;
+          outline: none;
+          resize: none;
+          font-size: 18px;
+          line-height: 1.4;
+          padding: 12px 0;
+          font-family: inherit;
+          background: transparent;
+          color: #14171a;
+          min-height: 48px;
+
+          &::placeholder {
+            color: #657786;
+          }
+
+          &.error {
+            border-bottom: 2px solid #e0245e;
+          }
+
+          &.over-limit {
+            color: #e0245e;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .character-count {
+          position: absolute;
+          bottom: -20px;
+          right: 0;
+          font-size: 12px;
+          color: #657786;
+          font-weight: bold;
+
+          &.over-limit {
+            color: #e0245e;
+          }
+        }
+      }
+    }
+
+    .form-errors {
+      margin-top: 8px;
+      margin-left: 52px;
+
+      .error-message {
+        color: #e0245e;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+    }
+
+    .form-footer {
+      margin-top: 24px;
+
+      .comment-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left-actions {
+          display: flex;
+          gap: 16px;
+        }
+
+        .right-actions {
+          .reply-button {
+            background: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 8px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover:not(:disabled) {
+              background: #0d8bd9;
+            }
+
+            &:disabled {
+              background: #8ed0f9;
+              cursor: not-allowed;
+            }
+
+            &.loading {
+              .loading-text {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .spinner {
+                  width: 16px;
+                  height: 16px;
+                  border: 2px solid rgba(255, 255, 255, 0.3);
+                  border-top: 2px solid white;
+                  border-radius: 50%;
+                  animation: spin 1s linear infinite;
+                }
+
+                @keyframes spin {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.auth-prompt {
+  border-top: 1px solid #e1e8ed;
+  padding: 20px;
+  text-align: center;
+  background: #f7f9fa;
+
+  .auth-message {
+    h3 {
+      color: #14171a;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: #657786;
+      font-size: 14px;
+      margin: 0 0 16px 0;
+    }
+
+    .auth-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+
+      .auth-link {
+        text-decoration: none;
+        padding: 8px 20px;
+        border-radius: 9999px;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.2s ease;
+
+        &.login-link {
+          color: #1da1f2;
+          border: 1px solid #1da1f2;
+
+          &:hover {
+            background: rgba(29, 161, 242, 0.1);
+          }
+        }
+
+        &.signup-link {
+          background: #1da1f2;
+          color: white;
+          border: 1px solid #1da1f2;
+
+          &:hover {
+            background: #0d8bd9;
+            border-color: #0d8bd9;
+          }
+        }
+      }
+    }
+  }
+}

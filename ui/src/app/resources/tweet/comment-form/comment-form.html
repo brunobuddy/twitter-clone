@@ -1,0 +1,70 @@
+<div class="comment-form-container" *ngIf="authService.isAuthenticated()">
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+    <div class="form-body">
+      <div class="user-avatar">
+        <div class="avatar-placeholder">
+          {{ authService.currentUser()?.username?.charAt(0)?.toUpperCase() }}
+        </div>
+      </div>
+
+      <div class="textarea-container">
+        <textarea
+          formControlName="content"
+          placeholder="Post your reply"
+          class="comment-textarea"
+          rows="2"
+          (input)="onTextareaInput($event)"
+          [class.error]="content?.invalid && content?.touched"
+          [class.over-limit]="isOverLimit"
+        ></textarea>
+
+        <div class="character-count" [class.over-limit]="isOverLimit">
+          {{ remainingCharacters }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-errors" *ngIf="content?.errors && content?.touched">
+      <div *ngIf="content?.errors?.['required']" class="error-message">
+        Comment content is required
+      </div>
+      <div *ngIf="content?.errors?.['maxlength']" class="error-message">
+        Comment is too long (maximum {{ maxLength }} characters)
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <div class="comment-actions">
+        <div class="left-actions">
+          <!-- Future: Add emoji buttons here -->
+        </div>
+
+        <div class="right-actions">
+          <button
+            type="submit"
+            class="reply-button"
+            [disabled]="!canSubmit"
+            [class.loading]="isSubmitting"
+          >
+            <span *ngIf="!isSubmitting">Reply</span>
+            <span *ngIf="isSubmitting" class="loading-text">
+              <span class="spinner"></span>
+              Replying...
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="auth-prompt" *ngIf="!authService.isAuthenticated()">
+  <div class="auth-message">
+    <h3>Join the conversation</h3>
+    <p>Log in to reply to this tweet</p>
+    <div class="auth-links">
+      <a routerLink="/login" class="auth-link login-link">Log in</a>
+      <a routerLink="/signup" class="auth-link signup-link">Sign up</a>
+    </div>
+  </div>
+</div>
