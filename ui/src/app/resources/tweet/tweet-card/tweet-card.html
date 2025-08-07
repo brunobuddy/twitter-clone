@@ -2,12 +2,12 @@
   <div class="tweet-header">
     <div class="user-avatar">
       <div class="avatar-placeholder">
-        {{ tweet.author?.username?.charAt(0)?.toUpperCase() }}
+        {{ tweet.user?.username?.charAt(0)?.toUpperCase() }}
       </div>
     </div>
     <div class="user-info">
-      <a class="username" [routerLink]="['/users', tweet.author?.id]">{{
-        tweet.author?.username
+      <a class="username" [routerLink]="['/users', tweet.user?.id]">{{
+        tweet.user?.username
       }}</a>
       <span class="tweet-time">{{ tweet.createdAt | date : "short" }}</span>
     </div>

@@ -10,7 +10,7 @@ entities:
       - { name: content, type: text }
       - { name: createdAt, type: timestamp }
     belongsTo:
-      - { name: author, entity: User }
+      - { name: user, entity: User }
     policies:
       read:
         - { access: public }

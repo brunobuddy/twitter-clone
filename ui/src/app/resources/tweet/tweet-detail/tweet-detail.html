@@ -7,15 +7,15 @@
     <div class="tweet-header">
       <div class="user-avatar">
         <div class="avatar-placeholder">
-          {{ tweet.author?.username?.charAt(0)?.toUpperCase() }}
+          {{ tweet.user?.username?.charAt(0)?.toUpperCase() }}
         </div>
       </div>
       <div class="user-info">
-        <a [routerLink]="['/users', tweet.author?.id]"
-          ><div class="username">{{ tweet.author?.username }}</div></a
+        <a [routerLink]="['/users', tweet.user?.id]"
+          ><div class="username">{{ tweet.user?.username }}</div></a
         >
-        <a [routerLink]="['/users', tweet.author?.id]"
-          ><div class="user-handle">@{{ tweet.author?.username }}</div></a
+        <a [routerLink]="['/users', tweet.user?.id]"
+          ><div class="user-handle">@{{ tweet.user?.username }}</div></a
         >
       </div>
     </div>

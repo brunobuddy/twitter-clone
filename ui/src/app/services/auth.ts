@@ -177,6 +177,19 @@ export class AuthService {
   }
 
   /**
+   * Get authorization headers only if user is authenticated
+   */
+  getAuthHeadersIfAuthenticated(): HttpHeaders {
+    const token = this.getStoredToken();
+    if (token) {
+      return new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+    }
+    return new HttpHeaders();
+  }
+
+  /**
    * Admin login (if needed in the future)
    */
   adminLogin(credentials: LoginDto): Observable<AuthResponse> {

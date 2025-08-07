@@ -50,7 +50,7 @@ export class UserDetail {
   }
   private loadTweets(userId: string): void {
     this.tweetService
-      .getTweets({ 'author.id_eq': userId, relations: ['author'] })
+      .getTweets({ 'user.id_eq': userId, relations: ['user'] })
       .subscribe({
         next: (tweets: PaginatedResponse<Tweet>) => {
           this.tweets = tweets.data;

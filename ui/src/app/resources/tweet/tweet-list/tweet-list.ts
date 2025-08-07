@@ -21,7 +21,7 @@ export class TweetList {
   }
 
   private loadTweets(): void {
-    this.tweetService.getTweets({ relations: ['author'] }).subscribe({
+    this.tweetService.getTweets({ relations: ['user'] }).subscribe({
       next: (response) => {
         this.tweets = response.data;
       },
@@ -33,14 +33,14 @@ export class TweetList {
 
   onTweetCreated(newTweet: Tweet): void {
     // Add the new tweet to the beginning of the list
-    // First, we need to load the tweet with author relation
-    this.tweetService.getTweetById(newTweet.id, ['author']).subscribe({
-      next: (tweetWithAuthor) => {
-        this.tweets.unshift(tweetWithAuthor);
+    // First, we need to load the tweet with user relation
+    this.tweetService.getTweetById(newTweet.id, ['user']).subscribe({
+      next: (tweetWithUser) => {
+        this.tweets.unshift(tweetWithUser);
       },
       error: (error) => {
         console.error('Error loading new tweet details:', error);
-        // Fallback: just add the tweet without author details
+        // Fallback: just add the tweet without user details
         this.tweets.unshift(newTweet);
       },
     });

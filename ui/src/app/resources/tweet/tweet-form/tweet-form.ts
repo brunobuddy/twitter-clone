@@ -72,7 +72,7 @@ export class TweetForm {
     const tweetData: CreateUpdateTweetDto = {
       content: this.content!.value.trim(),
       createdAt: new Date(),
-      authorId: currentUser.id,
+      userId: currentUser.id,
     };
 
     this.tweetService.createTweet(tweetData).subscribe({

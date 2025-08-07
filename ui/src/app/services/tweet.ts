@@ -1,13 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth';
 
 // Types from the backend
 export interface Tweet {
   id: string;
   content: string;
   createdAt: Date;
-  author?: User;
+  user?: User;
   comments?: Comment[];
 }
 
@@ -31,7 +32,7 @@ export interface Comment {
 export interface CreateUpdateTweetDto {
   content: string;
   createdAt: Date;
-  authorId?: string;
+  userId?: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -54,9 +55,9 @@ export interface TweetListParams {
   perPage?: number;
   orderBy?: 'content' | 'createdAt';
   order?: 'ASC' | 'DESC';
-  relations?: ('author' | 'comments')[];
+  relations?: ('user' | 'comments')[];
   content_eq?: string;
-  'author.id_eq'?: string;
+  'user.id_eq'?: string;
   content_neq?: string;
   content_like?: string;
   content_in?: string;
@@ -74,15 +75,18 @@ export interface TweetListParams {
 })
 export class TweetService {
   private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
   private readonly baseUrl = 'http://localhost:1111/api';
 
   /**
    * Create a new tweet
    */
   createTweet(tweetData: CreateUpdateTweetDto): Observable<Tweet> {
+    const headers = this.authService.getAuthHeaders();
     return this.http.post<Tweet>(
       `${this.baseUrl}/collections/tweets`,
-      tweetData
+      tweetData,
+      { headers }
     );
   }
 
@@ -117,7 +121,7 @@ export class TweetService {
    */
   getTweetById(
     id: string,
-    relations?: ('author' | 'comments')[]
+    relations?: ('user' | 'comments')[]
   ): Observable<Tweet> {
     let httpParams = new HttpParams();
 
@@ -134,9 +138,11 @@ export class TweetService {
    * Update a tweet completely (PUT - full replace)
    */
   updateTweet(id: string, tweetData: CreateUpdateTweetDto): Observable<Tweet> {
+    const headers = this.authService.getAuthHeaders();
     return this.http.put<Tweet>(
       `${this.baseUrl}/collections/tweets/${id}`,
-      tweetData
+      tweetData,
+      { headers }
     );
   }
 
@@ -147,9 +153,11 @@ export class TweetService {
     id: string,
     tweetData: Partial<CreateUpdateTweetDto>
   ): Observable<Tweet> {
+    const headers = this.authService.getAuthHeaders();
     return this.http.patch<Tweet>(
       `${this.baseUrl}/collections/tweets/${id}`,
-      tweetData
+      tweetData,
+      { headers }
     );
   }
 
@@ -157,7 +165,10 @@ export class TweetService {
    * Delete a tweet by ID
    */
   deleteTweet(id: string): Observable<Tweet> {
-    return this.http.delete<Tweet>(`${this.baseUrl}/collections/tweets/${id}`);
+    const headers = this.authService.getAuthHeaders();
+    return this.http.delete<Tweet>(`${this.baseUrl}/collections/tweets/${id}`, {
+      headers,
+    });
   }
 
   /**
@@ -187,13 +198,12 @@ export class TweetService {
    */
   getTweetsByAuthor(
     authorId: string,
-    params?: Omit<TweetListParams, 'authorId'>
+    params?: Omit<TweetListParams, 'user.id_eq'>
   ): Observable<PaginatedResponse<Tweet>> {
-    // Note: This would require filtering by authorId if available in the API
-    // For now, we'll need to implement this on the frontend after fetching tweets with author relation
     return this.getTweets({
       ...params,
-      relations: ['author', ...(params?.relations || [])],
+      'user.id_eq': authorId,
+      relations: ['user', ...(params?.relations || [])],
     });
   }
 
@@ -206,7 +216,7 @@ export class TweetService {
       order: 'DESC',
       perPage: limit,
       page: 1,
-      relations: ['author'],
+      relations: ['user'],
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth';
 
 // Import shared types
 export interface User {
@@ -66,13 +67,17 @@ export interface UserListParams {
 })
 export class UserService {
   private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
   private readonly baseUrl = 'http://localhost:1111/api';
 
   /**
    * Create a new user
    */
   createUser(userData: CreateUpdateUserDto): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/collections/users`, userData);
+    const headers = this.authService.getAuthHeaders();
+    return this.http.post<User>(`${this.baseUrl}/collections/users`, userData, {
+      headers,
+    });
   }
 
   /**
@@ -123,9 +128,11 @@ export class UserService {
    * Update a user completely (PUT - full replace) - Admin only
    */
   updateUser(id: string, userData: CreateUpdateUserDto): Observable<User> {
+    const headers = this.authService.getAuthHeaders();
     return this.http.put<User>(
       `${this.baseUrl}/collections/users/${id}`,
-      userData
+      userData,
+      { headers }
     );
   }
 
@@ -136,9 +143,11 @@ export class UserService {
     id: string,
     userData: Partial<CreateUpdateUserDto>
   ): Observable<User> {
+    const headers = this.authService.getAuthHeaders();
     return this.http.patch<User>(
       `${this.baseUrl}/collections/users/${id}`,
-      userData
+      userData,
+      { headers }
     );
   }
 
@@ -146,7 +155,10 @@ export class UserService {
    * Delete a user by ID - Admin only
    */
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`${this.baseUrl}/collections/users/${id}`);
+    const headers = this.authService.getAuthHeaders();
+    return this.http.delete<User>(`${this.baseUrl}/collections/users/${id}`, {
+      headers,
+    });
   }
 
   /**

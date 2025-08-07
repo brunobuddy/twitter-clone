@@ -27,7 +27,7 @@ export class TweetDetail {
   }
 
   private loadTweet(tweetId: string): void {
-    this.tweetService.getTweetById(tweetId, ['author', 'comments']).subscribe({
+    this.tweetService.getTweetById(tweetId, ['user', 'comments']).subscribe({
       next: (tweet) => {
         // Handle the loaded tweet
         this.tweet = tweet;
