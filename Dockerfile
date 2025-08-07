@@ -20,4 +20,4 @@ ENV NODE_ENV=production
 EXPOSE 1111
 
 # Start the application
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]

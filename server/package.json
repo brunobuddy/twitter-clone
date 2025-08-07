@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "node node_modules/manifest/scripts/watch/watch.js",
+    "start:prod": "node node_modules/manifest/dist/manifest/src/main.js",
     "seed": "node node_modules/manifest/dist/manifest/src/seed/scripts/seed.js"
   },
   "dependencies": {
