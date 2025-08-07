@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Tweet, TweetService } from '../../../services/tweet';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-tweet-detail',
-  imports: [DatePipe, NgIf, NgFor],
+  imports: [DatePipe, NgIf, NgFor, RouterLink],
   templateUrl: './tweet-detail.html',
   styleUrl: './tweet-detail.scss',
 })

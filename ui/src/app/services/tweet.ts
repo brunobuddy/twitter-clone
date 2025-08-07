@@ -56,6 +56,7 @@ export interface TweetListParams {
   order?: 'ASC' | 'DESC';
   relations?: ('author' | 'comments')[];
   content_eq?: string;
+  'author.id_eq'?: string;
   content_neq?: string;
   content_like?: string;
   content_in?: string;

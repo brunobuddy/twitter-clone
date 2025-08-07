@@ -1,6 +1,10 @@
-<h1>Tweet list</h1>
-<ul>
-  <li *ngFor="let tweet of tweets">
-    <app-tweet-card [tweet]="tweet"></app-tweet-card>
-  </li>
-</ul>
+<div class="tweet-list-container">
+  <div class="tweet-list-header">
+    <h1 class="page-title">Home</h1>
+  </div>
+  <div class="tweet-list">
+    <div class="tweet-item" *ngFor="let tweet of tweets">
+      <app-tweet-card [tweet]="tweet"></app-tweet-card>
+    </div>
+  </div>
+</div>

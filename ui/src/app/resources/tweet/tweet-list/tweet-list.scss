@@ -1,0 +1,37 @@
+.tweet-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+
+  .tweet-list-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e1e8ed;
+    padding: 16px 20px;
+    z-index: 10;
+
+    .page-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #14171a;
+      margin: 0;
+    }
+  }
+
+  .tweet-list {
+    .tweet-item {
+      border-bottom: 1px solid #e1e8ed;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      app-tweet-card {
+        display: block;
+      }
+    }
+  }
+}

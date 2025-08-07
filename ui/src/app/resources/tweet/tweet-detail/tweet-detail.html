@@ -1,19 +1,65 @@
-<ng-container *ngIf="tweet">
-  <h1>{{ tweet.content }}</h1>
-  <p>
-    By: <a href="/users/{{ tweet.author?.id }}">{{ tweet.author?.username }}</a>
-  </p>
-  <p>Created at: {{ tweet.createdAt | date : "short" }}</p>
-  <ul>
-    <li *ngFor="let comment of tweet.comments">
-      <p>{{ comment.content }}</p>
-      <p>
-        By:
-        <a href="/users/{{ comment.author?.id }}">{{
-          comment.author?.username
-        }}</a>
-      </p>
-      <p>Created at: {{ comment.createdAt | date : "short" }}</p>
-    </li>
-  </ul>
-</ng-container>
+<div class="tweet-detail-container" *ngIf="tweet">
+  <div class="tweet-detail-header">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+  </div>
+
+  <div class="main-tweet">
+    <div class="tweet-header">
+      <div class="user-avatar">
+        <div class="avatar-placeholder">
+          {{ tweet.author?.username?.charAt(0)?.toUpperCase() }}
+        </div>
+      </div>
+      <div class="user-info">
+        <a [routerLink]="['/users', tweet.author?.id]"
+          ><div class="username">{{ tweet.author?.username }}</div></a
+        >
+        <a [routerLink]="['/users', tweet.author?.id]"
+          ><div class="user-handle">@{{ tweet.author?.username }}</div></a
+        >
+      </div>
+    </div>
+
+    <div class="tweet-content">
+      <p class="tweet-text">{{ tweet.content }}</p>
+    </div>
+
+    <div class="tweet-timestamp">
+      <span>{{ tweet.createdAt | date : "medium" }}</span>
+    </div>
+
+    <div class="tweet-actions">
+      <button class="action-btn reply-btn">
+        <span class="action-icon">💬</span>
+        <span class="action-count">{{ tweet.comments?.length || 0 }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="comments-section"
+    *ngIf="tweet.comments && tweet.comments.length > 0"
+  >
+    <div class="comments-header">
+      <h3>Replies</h3>
+    </div>
+    <div class="comment" *ngFor="let comment of tweet.comments">
+      <div class="comment-header">
+        <div class="user-avatar">
+          <div class="avatar-placeholder small">
+            {{ comment.author?.username?.charAt(0)?.toUpperCase() }}
+          </div>
+        </div>
+        <div class="user-info">
+          <span class="username">{{ comment.author?.username }}</span>
+          <span class="comment-time">{{
+            comment.createdAt | date : "short"
+          }}</span>
+        </div>
+      </div>
+      <div class="comment-content">
+        <p>{{ comment.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+.user-detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+
+  .user-detail-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e1e8ed;
+    padding: 16px 20px;
+    z-index: 10;
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: #1da1f2;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: rgba(29, 161, 242, 0.1);
+      }
+    }
+  }
+
+  .user-profile-header {
+    .cover-photo {
+      height: 200px;
+      position: relative;
+
+      .cover-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+      }
+    }
+
+    .profile-info {
+      padding: 16px 20px;
+      position: relative;
+
+      .profile-picture {
+        position: absolute;
+        top: -40px;
+        left: 20px;
+
+        .avatar-placeholder {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 32px;
+          border: 4px solid white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+          &.large {
+            width: 80px;
+            height: 80px;
+            font-size: 32px;
+          }
+        }
+      }
+
+      .user-meta {
+        margin-top: 50px;
+
+        .username {
+          font-size: 20px;
+          font-weight: bold;
+          color: #14171a;
+          margin: 0 0 4px 0;
+        }
+
+        .user-handle {
+          color: #657786;
+          font-size: 15px;
+          margin: 0 0 16px 0;
+        }
+
+        .user-stats {
+          display: flex;
+          gap: 20px;
+
+          .stat {
+            color: #657786;
+            font-size: 14px;
+
+            strong {
+              color: #14171a;
+              font-weight: bold;
+            }
+
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .user-tweets-section {
+    border-top: 1px solid #e1e8ed;
+    margin-top: 20px;
+
+    .tweets-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e1e8ed;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #14171a;
+        margin: 0;
+      }
+    }
+
+    .tweets-list {
+      .tweet-item {
+        border-bottom: 1px solid #e1e8ed;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        app-tweet-card {
+          display: block;
+        }
+      }
+
+      .no-tweets {
+        padding: 40px 20px;
+        text-align: center;
+
+        p {
+          color: #657786;
+          font-size: 16px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

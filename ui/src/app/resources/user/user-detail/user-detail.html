@@ -1,1 +1,41 @@
-<p>user-detail works!</p>
+<div class="user-detail-container" *ngIf="user">
+  <div class="user-detail-header">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+  </div>
+
+  <div class="user-profile-header">
+    <div class="cover-photo">
+      <div class="cover-placeholder"></div>
+    </div>
+    <div class="profile-info">
+      <div class="profile-picture">
+        <div class="avatar-placeholder large">
+          {{ user.username?.charAt(0)?.toUpperCase() }}
+        </div>
+      </div>
+      <div class="user-meta">
+        <h1 class="username">{{ user.username }}</h1>
+        <p class="user-handle">@{{ user.username }}</p>
+        <div class="user-stats">
+          <span class="stat">
+            <strong>{{ tweets?.length || 0 }}</strong> Tweets
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-tweets-section">
+    <div class="tweets-header">
+      <h2>Tweets</h2>
+    </div>
+    <div class="tweets-list">
+      <div class="tweet-item" *ngFor="let tweet of tweets">
+        <app-tweet-card [tweet]="tweet"></app-tweet-card>
+      </div>
+      <div class="no-tweets" *ngIf="!tweets || tweets.length === 0">
+        <p>No tweets yet</p>
+      </div>
+    </div>
+  </div>
+</div>
